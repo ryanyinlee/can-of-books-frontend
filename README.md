@@ -1,10 +1,52 @@
-# Start your own "Can of Books" App
+# Can of Books App
 
-This repository has starter code to begin work on creating your own online bookshelf.
+**Author**: Matt Miguel, Ryan Lee
+**Version**: 0.0.1 
 
-## What can books do?
+## Overview <!-- Provide a high level overview of what this application is and why you are building it, beyond the fact that it's an assignment for this class. (i.e. What's your problem domain?) -->
+Create an app that tracks what books have impacted users and to recommend what to read next.
 
-Books are life-changing. They have the power to enlighten, educate, entertain, heal, and help us grow. Build out this code base to create an web app to track what books have impacted you, and what's recommended to read next.
+*"Books are life-changing. They have the power to enlighten, educate, entertain, heal, and help us grow. Build out this code base to create an web app to track what books have impacted you, and what's recommended to read next."*
+
+
+## Getting Started <!-- What are the steps that a user must take in order to build this app on their own machine and get it running? -->
+
+
+## Architecture <!-- Provide a detailed description of the application design. What technologies (languages, libraries, etc) you're using, and any other relevant design information. -->
+
+
+## Change Log <!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an example:
+
+12-13-2021 2:44pm PST - Updating README.
+
+## Credit and Collaborations <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
+
+
+
+
+# Feature Time Estimates
+
+Name of feature: Storage
+
+Estimate of time needed to complete: 3hrs
+
+Start time: 2:08PM PST
+
+Finish time: 5:58PM
+
+Actual time needed to complete: 3hr 50min
+
+---
+
+Name of feature: Book Component
+
+Estimate of time needed to complete: 1hrs
+
+Start time: 5:58PM PST
+
+Finish time: 
+
+Actual time needed to complete: 
 
 # Team Agreement.
 
