@@ -15,13 +15,19 @@ class BestBooks extends React.Component {
 
   /* TODO: Make a GET request to your API to fetch books for the logged in user  */
   getBooks = async () => {
+
     let url = `${process.env.REACT_APP_SERVER_URL}/books`;
     console.log(url);
 
+    if (this.props.user) {
+      url = `${process.env.REACT_APP_SERVER_URL}/books?email=${this.props.user.email}`;
+      console.log(url);
+    }
+    
     try {
       let result = await axios.get(url);
       console.log(result.data);
-      this.setState({ books: result.data})
+      this.setState({ books: result.data })
       console.log(this.state.books);
       console.log(this.state.books[0].title);
       this.setState({ error: false });
@@ -43,24 +49,22 @@ class BestBooks extends React.Component {
 
     return (
       <>
-        <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2>
+        <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2><br></br>
 
-        {this.state.books.length > 0 ? 
+        {this.state.books.length > 0 ?
           (
-          <Carousel>
-             {this.state.books.map(oneBook =>
-              <Carousel.Item>
-                  <li key={oneBook.title}>
-                  <h3>{oneBook.title}</h3>
-                  <Carousel.Caption>{oneBook.description}</Carousel.Caption>
-                  {oneBook.status}
-                  {oneBook.email}
-                </li>
-            
-                          
-            </Carousel.Item>)}
-          </Carousel>
-          ) : (<h3>No Books Found :(</h3>)}
+            <Carousel>
+              {this.state.books.map(oneBook =>
+                <Carousel.Item>
+                  <li key={oneBook._id}>
+                    <h3>{oneBook.title}</h3><br></br>
+                    <p>{oneBook.description}</p>
+                    <p>{oneBook.status}</p>
+                    <p>{oneBook.email}</p>
+                  </li>
+                </Carousel.Item>)}
+            </Carousel>
+          ) : (<h3>No Books Found :C</h3>)}
       </>
     )
   }
