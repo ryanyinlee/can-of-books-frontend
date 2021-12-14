@@ -1,7 +1,9 @@
 import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
+import BestBooks from './BestBooks.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
 import {
   BrowserRouter as Router,
   Switch,
@@ -36,6 +38,7 @@ class App extends React.Component {
           <Header user={this.state.user} onLogout={this.logoutHandler} />
           <Switch>
             <Route exact path="/">
+              <BestBooks></BestBooks>
               {/* TODO: if the user is logged in, render the `BestBooks` component, if they are not, render the `Login` component */}
             </Route>
             {/* TODO: add a route with a path of '/profile' that renders a `Profile` component */}
