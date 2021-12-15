@@ -2,7 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import Carousel from 'react-bootstrap/Carousel';
 import DeleteButton from './DeleteButton';
-import Card from 'react-bootstrap/Card'
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
 
 
 class BestBooks extends React.Component {
@@ -65,6 +66,7 @@ class BestBooks extends React.Component {
                       <p>{oneBook.description}</p>
                       <p>{oneBook.status}</p>
                       <p>{oneBook.email}</p>
+                      <span onClick = {() => this.props.updateBook(this.state.books._id)}> <Button/></span>
                       <span onClick = {() => this.props.deleteBook(this.state.books._id)}> <DeleteButton/></span>
                     </li>
 

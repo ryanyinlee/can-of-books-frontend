@@ -1,21 +1,13 @@
 import React, { Component } from "react";
+import Modal from 'react-bootstrap/Modal';
 
-function Example() {
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-}
 
 export default class BookForModal extends Component {
+
   render() {
     return (
       <>
-        <Button variant="primary" onClick={handleShow}>
-          Launch demo modal
-        </Button>
-
-        <Modal show={show} onHide={handleClose}>
+        <Modal show={this.props.showModal} onHide={this.props.closeModal}>
           <Modal.Header closeButton>
             <Modal.Title>Enter your book!</Modal.Title>
           </Modal.Header>
