@@ -42,6 +42,22 @@ class AddBook extends Component {
       
   }
 
+  deleteBook = async (id) => {
+
+    try{
+
+      await axios.delete(process.env.REACT_APP_SERVER_URL + '/books/' + id);
+      const updatedBooks = this.state.books.filter(book => book._id !== id)
+      console.log(updatedBooks);
+      this.setState({ books: updatedBooks })
+
+    }catch (e){
+      console.log(e);
+    }
+
+      
+  }
+
 
   render() {
     

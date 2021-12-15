@@ -1,7 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 import Carousel from 'react-bootstrap/Carousel';
-// import Card from 'react-bootstrap/Card';
+import DeleteButton from './DeleteButton';
+import Card from 'react-bootstrap/Card'
+
 
 class BestBooks extends React.Component {
 
@@ -55,12 +57,20 @@ class BestBooks extends React.Component {
             <Carousel>
               {this.state.books.map(oneBook =>
                 <Carousel.Item>
-                  <li key={oneBook._id}>
-                    <h3>{oneBook.title}</h3><br></br>
-                    <p>{oneBook.description}</p>
-                    <p>{oneBook.status}</p>
-                    <p>{oneBook.email}</p>
-                  </li>
+                  {/* <Carousel.Caption>  */}
+                    <Card>
+
+                    <li key={oneBook._id}>
+                      <h3>{oneBook.title}</h3><br></br>
+                      <p>{oneBook.description}</p>
+                      <p>{oneBook.status}</p>
+                      <p>{oneBook.email}</p>
+                      <span onClick = {() => this.props.deleteBook(this.state.books._id)}> <DeleteButton/></span>
+                    </li>
+
+                    </Card>
+
+                  {/* </Carousel.Caption> */}
                 </Carousel.Item>)}
             </Carousel>
           ) : (<h3>No Books Found :C</h3>)}
