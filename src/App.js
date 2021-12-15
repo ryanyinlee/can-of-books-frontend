@@ -4,6 +4,7 @@ import Login from './Login';
 import Footer from './Footer';
 import BestBooks from './BestBooks.js';
 import Profile from './Profile';
+import AddBook from './AddBook';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import {
@@ -38,11 +39,7 @@ class App extends React.Component {
     })
   }
 
-makeBook = async (newBook) => {
-  
 
-  this.setState({ books: [...this.state.books ]})
-}
 
 // deleteBook = async (id) => {
 // try {
@@ -71,13 +68,17 @@ makeBook = async (newBook) => {
               {/* DONE: if the user is logged in, render the `BestBooks` component, if they are not, render the `Login` component */}
               
               {this.state.user ? <BestBooks user={this.state.user}/> : <Login loginHandler={this.loginHandler}/>}
-              
-            </Route>
+              </Route>
             
-            {/* TODO: add a route with a path of '/profile' that renders a `Profile` component */}
+            {/* DONE: add a route with a path of '/profile' that renders a `Profile` component */}
             {this.state.user ? <Profile exact path="/profile"
             name={this.state.user.name}
-            email={this.state.user.email}></Profile> : <p></p>}
+            email={this.state.user.email}>
+            </Profile> : <p></p>}
+
+            {this.state.user ? <AddBook exact path="/addbook">
+
+            </AddBook> : <p></p>}
           </Switch>
           <Footer />
         </Router>

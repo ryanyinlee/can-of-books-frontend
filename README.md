@@ -1,26 +1,34 @@
 # Can of Books App
 
-**Author**: Matt Miguel, Ryan Lee
-**Version**: 0.0.1 
+**Author(s)**: Matt Miguel, Ryan Lee
+**Version**: 0.0.25
 
 ## Overview <!-- Provide a high level overview of what this application is and why you are building it, beyond the fact that it's an assignment for this class. (i.e. What's your problem domain?) -->
 Create an app that tracks what books have impacted users and to recommend what to read next.
 
 *"Books are life-changing. They have the power to enlighten, educate, entertain, heal, and help us grow. Build out this code base to create an web app to track what books have impacted you, and what's recommended to read next."*
 
-
 ## Getting Started <!-- What are the steps that a user must take in order to build this app on their own machine and get it running? -->
 
+Build backend. Build front end. Deploy backend to server. Set up database in MongoDB.
 
 ## Architecture <!-- Provide a detailed description of the application design. What technologies (languages, libraries, etc) you're using, and any other relevant design information. -->
 
+JSON format for data, Heroku (to act as a server), Netlify (for live deploys), Javascript, CSS, HTML, MongoDB (for the database)
 
 ## Change Log <!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an example:
 
-12-13-2021 2:44pm PST - Updating README.
+12-13-2021 2:44PM PST - Updating README.
+12-13-2021 5:58PM PST - Implement Storage
+
+12-14-2021 4:28PM PST - Display book carousel based off of user email input.
+12-14-2021 PM PST - Implement add/delete book capabilities.
 
 ## Credit and Collaborations <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
 
+Thanks to: Sara Russert (Instructor), Steven Boston (TA), Taylor Thorton (TA), Marie Marcos (TA) and Andrew and Erik for some guidance on the project.
+
+React Bootstrap documentation folks for implementation of Carousel.
 
 
 
@@ -44,11 +52,23 @@ Estimate of time needed to complete: 1hrs
 
 Start time: 5:58PM PST
 
+Finish time: 4:28PM PST (next day)
+
+Actual time needed to complete: Approximately 6 hours
+
+--- 
+
+Name of feature: Add/Delete Books
+
+Estimate of time needed to complete: 3hrs
+
+Start time: 4:29PM PST
+
 Finish time: 
 
 Actual time needed to complete: 
 
-# Team Agreement.
+# Team Agreement:
 
 ## Logistical
 
