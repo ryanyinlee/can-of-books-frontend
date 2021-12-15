@@ -1,6 +1,6 @@
 import { Component } from "react";
 import Card from "react-bootstrap/Card";
-import LoginButton from "./LoginButton";
+// import LoginButton from "./LoginButton";
 
 class Profile extends Component {
 
