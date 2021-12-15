@@ -1,8 +1,6 @@
 import { Component } from "react";
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
 import axios from 'axios';
+import BestBooks from "./BestBooks";
 
 class AddBook extends Component {
 
@@ -42,21 +40,21 @@ class AddBook extends Component {
       
   }
 
-  deleteBook = async (id) => {
+  // deleteBook = async (id) => {
 
-    try{
+  //   try{
+  //     const url = `${process.env.REACT_APP_SERVER_URL}/books/${id}?email=${this.props.user.email}`
+  //     await axios.delete(url);
+  //     const updatedBooks = this.state.books.filter(book => book._id !== id)
+  //     console.log(updatedBooks);
+  //     this.setState({ books: updatedBooks })
 
-      await axios.delete(process.env.REACT_APP_SERVER_URL + '/books/' + id + '?email=' + this.props.user.email);
-      const updatedBooks = this.state.books.filter(book => book._id !== id)
-      console.log(updatedBooks);
-      this.setState({ books: updatedBooks })
-
-    }catch (e){
-      console.log(e);
-    }
+  //   }catch (e){
+  //     console.log(e);
+  //   }
 
       
-  }
+  // }
 
   updateBook = async (updatedBookObj, id) => {
 
@@ -82,40 +80,45 @@ class AddBook extends Component {
   render() {
     
     return (
-    <Container>
+      <div>
+
+        <BestBooks deleteBook={this.deleteBook} />
+
+      </div>
+    // <Container>
         
 
-      <Form onSubmit={this.handleSubmit}>
+    //   <Form onSubmit={this.handleSubmit}>
 
              
-        <Form.Group className="mb-3" controlId="title">
-          <Form.Label>Title</Form.Label>
-          <Form.Control type ="text" placeholder="book title here"/>
-        </Form.Group>
+    //     <Form.Group className="mb-3" controlId="title">
+    //       <Form.Label>Title</Form.Label>
+    //       <Form.Control type ="text" placeholder="book title here"/>
+    //     </Form.Group>
 
-        <Form.Group className="mb-3" controlId="description">
-          <Form.Label>Book Description</Form.Label>
-          <Form.Control type ="text" placeholder="description of book here"/>
-        </Form.Group>
+    //     <Form.Group className="mb-3" controlId="description">
+    //       <Form.Label>Book Description</Form.Label>
+    //       <Form.Control type ="text" placeholder="description of book here"/>
+    //     </Form.Group>
 
-        <Form.Group className="mb-3" controlId="status">
-          <Form.Label>Book Status (Read/Unread)</Form.Label>
-          <Form.Control type ="text" placeholder="Read or not read?"/>
-        </Form.Group>
+    //     <Form.Group className="mb-3" controlId="status">
+    //       <Form.Label>Book Status (Read/Unread)</Form.Label>
+    //       <Form.Control type ="text" placeholder="Read or not read?"/>
+    //     </Form.Group>
 
-        <Form.Group className="mb-3" controlId="email">
-          <Form.Label>E-Mail</Form.Label>
-          <Form.Control type ="email" placeholder="e-mail address here"/>
-        </Form.Group>
+    //     <Form.Group className="mb-3" controlId="email">
+    //       <Form.Label>E-Mail</Form.Label>
+    //       <Form.Control type ="email" placeholder="e-mail address here"/>
+    //     </Form.Group>
 
-        <Form.Text>
-          Your email will be sold to Russian bot farms.
-        </Form.Text>
+    //     <Form.Text>
+    //       Your email will be sold to Russian bot farms.
+    //     </Form.Text>
 
-        <Button type ="submit">Submit Book</Button>
-      </Form>
-      </Container>
-    );
+    //     <Button type ="submit">Submit Book</Button>
+    //   </Form>
+    //   </Container>
+    )
   }
 };
 

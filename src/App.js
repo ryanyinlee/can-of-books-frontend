@@ -7,6 +7,7 @@ import Profile from './Profile';
 import AddBook from './AddBook';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import axios from 'axios';
 import {
   BrowserRouter as Router,
   Switch,
@@ -41,17 +42,21 @@ class App extends React.Component {
 
 
 
-// deleteBook = async (id) => {
-// try {
-//   await axios.delete(url + '/delete' + id);
-//   // remove the book whos id matches the book from the book array
-//   const updatedBooks = this.state.books.filter(bookRemoved => bookRemoved._id !== id);
-//   this.setState({ books: updatedBooks})
-// } catch (error) {
-//   console.error(error);
-// }
+  deleteBook = async (id) => {
 
-// }
+    try{
+      const url = `${process.env.REACT_APP_SERVER_URL}/books/${id}?email=${this.props.user.email}`
+      await axios.delete(url);
+      const updatedBooks = this.state.books.filter(book => book._id !== id)
+      console.log(updatedBooks);
+      this.setState({ books: updatedBooks })
+
+    }catch (e){
+      console.log(e);
+    }
+
+      
+  }
 
 
 
