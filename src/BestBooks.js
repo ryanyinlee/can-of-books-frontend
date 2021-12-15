@@ -3,7 +3,6 @@ import axios from 'axios';
 import Carousel from 'react-bootstrap/Carousel';
 // import Card from 'react-bootstrap/Card';
 
-
 class BestBooks extends React.Component {
 
   constructor(props) {
@@ -13,7 +12,7 @@ class BestBooks extends React.Component {
     }
   }
 
-  /* TODO: Make a GET request to your API to fetch books for the logged in user  */
+  /* DONE: Make a GET request to your API to fetch books for the logged in user  */
   getBooks = async () => {
 
     let url = `${process.env.REACT_APP_SERVER_URL}/books`;
@@ -45,7 +44,7 @@ class BestBooks extends React.Component {
 
   render() {
 
-    /* TODO: render user's books in a Carousel */
+    /* DONE: render user's books in a Carousel */
 
     return (
       <>
