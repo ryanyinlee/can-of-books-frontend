@@ -39,11 +39,7 @@ class App extends React.Component {
     })
   }
 
-makeBook = async (newBook) => {
-  
 
-  this.setState({ books: [...this.state.books ]})
-}
 
 // deleteBook = async (id) => {
 // try {

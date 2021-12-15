@@ -2,6 +2,7 @@ import { Component } from "react";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
+import axios from 'axios';
 
 class AddBook extends Component {
 
@@ -9,6 +10,7 @@ class AddBook extends Component {
         super(props);
         this.state = {
           user: null,
+          books: []
         }
       }
   
@@ -20,8 +22,24 @@ class AddBook extends Component {
         status: event.target.status.value,
         email: event.target.email.value
     }
+    this.makeBook(newBook);
     console.log(newBook);
     
+  }
+
+  makeBook = async (newBook) => {
+
+    try{
+
+      const userBook = await axios.post(process.env.REACT_APP_SERVER_URL + '/books', newBook);
+      console.log(newBook);
+      this.setState({ books: [...this.state.books, userBook.data ] })
+
+    }catch (e){
+      console.log(e);
+    }
+
+      
   }
 
 
