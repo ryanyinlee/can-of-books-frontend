@@ -31,13 +31,33 @@ class App extends React.Component {
   loginHandler = (user) => {
     this.setState({
       user,
-    })    
+
+    }, () => this.getBooks())
+    // await this.getBooks();    
   }
+
+
 
   logoutHandler = () => {
     this.setState({
       user: null,
     })
+  }
+
+  handleClick = () => {
+  
+    this.setState({showModal: true});
+  
+  }
+  
+  showModal =() => {
+  
+    this.setState({showModal:true});
+  }
+  
+  closeModal = () => {
+  
+    this.setState({showModal:false});
   }
 
 // handleSubmit = (event) => {
@@ -108,6 +128,7 @@ getBooks = async () => {
 
   let url = `${process.env.REACT_APP_SERVER_URL}/books`;
   
+  console.log(this.state.user)
   if (this.state.user) {
     url = `${process.env.REACT_APP_SERVER_URL}/books?email=${this.state.user.email}`;
     
@@ -127,7 +148,7 @@ getBooks = async () => {
 }
 
 componentDidMount() {
-  this.getBooks();
+  // this.getBooks();
 }
 
   render() {
@@ -153,9 +174,9 @@ componentDidMount() {
             name={this.state.user.name}
             email={this.state.user.email}>
             </Profile> : <p></p>}
-            {(this.state.user && this.state.showModal) ? <BookForModal makeBook ={this.props.makeBook} showModal = {this.state.showModal} closeModal = {this.state.closeModal} /> : <Button onClick = {this.handleClick} >Add A Book</Button>}
             
           </Switch>
+            {(this.state.user && this.state.showModal) ? <BookForModal makeBook ={this.makeBook} showModal = {this.state.showModal} closeModal = {this.closeModal} /> : <Button onClick = {this.handleClick} >Add A Book</Button>}
           <Footer />
         </Router>
       </>

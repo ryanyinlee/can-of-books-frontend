@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
 
+
 export default class BookForModal extends Component {
 
   handleSubmit = (event) => {
@@ -14,8 +15,10 @@ export default class BookForModal extends Component {
         status: event.target.status.value
         
     }
+    this.props.makeBook(newBook);
     this.props.closeModal();
     }
+
 
   render() {
     return (
