@@ -6,6 +6,7 @@ import BestBooks from './BestBooks.js';
 import Profile from './Profile';
 import BookForModal from './BookForModal';
 import Button from 'react-bootstrap/Button';
+import UpdateBookModal from './UpdateBookModal';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
@@ -176,7 +177,10 @@ componentDidMount() {
             </Profile> : <p></p>}
             
           </Switch>
-            {(this.state.user && this.state.showModal) ? <BookForModal makeBook ={this.makeBook} showModal = {this.state.showModal} closeModal = {this.closeModal} /> : <Button onClick = {this.handleClick} >Add A Book</Button>}
+            {(this.state.user && this.state.showModal) ? <BookForModal makeBook ={this.makeBook} showModal = {this.state.showModal} closeModal = {this.closeModal} /> : <> <Button onClick = {this.handleClick}> Add A Book</Button></> }
+
+            {(this.state.user && this.state.showModal) ? <UpdateBookModal updateBook ={this.updateBook} book={this.state.books} showModal = {this.state.showModal} closeModal = {this.closeModal} /> :
+            <Button onClick = {this.handleClick} >Update This Book</Button>}
           <Footer />
         </Router>
       </>

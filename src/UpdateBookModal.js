@@ -12,16 +12,16 @@ handleSubmit = (event) => {
     const updatedBook = {
         title: event.target.title.value || this.props.book.title,
         description: event.target.description.value || this.props.book.description,
-        status: event.target.status.value || this.props.book.value,
-        email: event.target.email.value || this.props.book.value
+        status: event.target.status.value || this.props.book.status
     }
-
+    this.props.updateBook(updatedBook, this.props.book._id);
+    this.props.closeModal();
 
 }
 
-
-
   render() {
+    console.log("this.props.book in updatebookmodal: " + this.props.book);
+    console.log("this.props.book._id in updatebookmodal: " + this.props.book._id);
     return (
       <>
         <Modal show={this.props.showModal} onHide={this.props.closeModal}>
@@ -48,31 +48,11 @@ handleSubmit = (event) => {
                   <Form.Label>Book Status (Read/Unread)</Form.Label>
                   <Form.Control type="text" placeholder={this.props.book.status} />
                 </Form.Group>
-
-                <Form.Group className="mb-3" controlId="email">
-                  <Form.Label>E-Mail</Form.Label>
-                  <Form.Control
-                    type="email"
-                    placeholder={this.props.book.email}
-                  />
-                </Form.Group>
-
-                <Form.Text>
-                  Your email will be sold to Russian bot farms.
-                </Form.Text>
-
                 <Button type="submit">Submit Updated Book</Button>
               </Form>
             </Container>
           </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
-            <Button variant="primary" onClick={handleClose}>
-              Save Changes
-            </Button>
-          </Modal.Footer>
+
         </Modal>
       </>
     );
