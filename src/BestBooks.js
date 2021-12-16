@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import Carousel from 'react-bootstrap/Carousel';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
@@ -7,55 +6,35 @@ import Button from 'react-bootstrap/Button';
 
 class BestBooks extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      books: []
-    }
+ handleClick = () => {
+  
+    this.setState({showModal: true});
+  
   }
-
-  /* DONE: Make a GET request to your API to fetch books for the logged in user  */
-  getBooks = async () => {
-
-    let url = `${process.env.REACT_APP_SERVER_URL}/books`;
-    console.log(url);
-
-    if (this.props.user) {
-      url = `${process.env.REACT_APP_SERVER_URL}/books?email=${this.props.user.email}`;
-      console.log(url);
-    }
-    
-    try {
-      let result = await axios.get(url);
-      console.log(result.data);
-      this.setState({ books: result.data })
-      console.log(this.state.books);
-      console.log(this.state.books[0].title);
-      this.setState({ error: false });
-    }
-    catch (error) {
-      console.error(error);
-      this.setState({ error: true });
-    }
+  
+  showModal =() => {
+  
+    this.setState({showModal:true});
   }
-
-  componentDidMount() {
-    this.getBooks();
+  
+  closeModal = () => {
+  
+    this.setState({showModal:false});
   }
-
 
   render() {
 
     /* DONE: render user's books in a Carousel */
-    console.log(this.props.deleteBook);
+    console.log("books id:" + this.props.books.id)
+    
     return (
       <>
         <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2><br></br>
 
-        {this.state.books.length > 0 ?
+        {this.props.books.length > 0 ?
           (
             <Carousel>
-              {this.state.books.map(oneBook =>
+              {this.props.books.map(oneBook =>
                 <Carousel.Item>
                   {/* <Carousel.Caption>  */}
                     <Card>
@@ -66,8 +45,10 @@ class BestBooks extends React.Component {
                       <p>{oneBook.description}</p>
                       <p>{oneBook.status}</p>
                       <p>{oneBook.email}</p>
-                      <span onClick = {() => this.props.updateBook(this.state.books._id)}> <Button>Update Book</Button></span>
-                      <span> <Button onClick = {() => this.props.deleteBook(this.state.books._id)}>Delete</Button></span>
+                      {/* <span onClick = {() => this.props.updateBook(this.state.books._id)}> <Button>Update Book</Button></span> */}
+                      
+                      <span> <Button onClick = {() => this.props.deleteBook(oneBook._id)}>Delete</Button></span>
+                    
                     </li>
 
                     </Card>

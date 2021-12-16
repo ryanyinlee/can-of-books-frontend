@@ -4,7 +4,12 @@ import { Link } from "react-router-dom";
 import './Header.css';
 import LogoutButton from './LogoutButton';
 
+
+
 class Header extends React.Component {
+
+
+
   render() {
     return (
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -13,7 +18,7 @@ class Header extends React.Component {
         {/* DONE: if the user is logged in, render a navigation link to profile page */}
         {this.props.user ? <NavItem><Link to="/profile" className="nav-link">Profile</Link></NavItem> : <p></p>}
 
-        {this.props.user ? <NavItem><Link to="/addbook" className="nav-link">Add a Book</Link></NavItem> : <p></p>}
+        {/* {this.props.user ? <NavItem><Link onClick={this.props.showModal} className="nav-link">Add a Book</Link></NavItem> : <p></p>} */}
 
         {/* DONE: if the user is logged in, render the `LogoutButton` */}
         {this.props.user ? <NavItem><LogoutButton>Log Out</LogoutButton></NavItem> : <p>Log in to enter books.</p>}

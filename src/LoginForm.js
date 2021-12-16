@@ -8,7 +8,7 @@ class LoginForm extends Component {
     event.preventDefault();
 
     const user = {name: event.target.userName.value, email: event.target.email.value}
-    console.log(user);
+    
     this.props.loginHandler(user);
     
   }
