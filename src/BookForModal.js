@@ -1,35 +1,54 @@
 import React, { Component } from "react";
+import Modal from "react-bootstrap/Modal";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
-function Example() {
-  const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-}
 
 export default class BookForModal extends Component {
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    const newBook = {
+        title: event.target.title.value,
+        description: event.target.description.value,
+        status: event.target.status.value
+        
+    }
+    this.props.makeBook(newBook);
+    this.props.closeModal();
+    }
+
+
   render() {
     return (
       <>
-        <Button variant="primary" onClick={handleShow}>
-          Launch demo modal
-        </Button>
-
-        <Modal show={show} onHide={handleClose}>
+        <Modal show={this.props.showModal} onHide={this.props.closeModal}>
           <Modal.Header closeButton>
             <Modal.Title>Enter your book!</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-              <AddBook/>
-              </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
-            <Button variant="primary" onClick={handleClose}>
-              Save Changes
-            </Button>
-          </Modal.Footer>
+            <Form onSubmit={this.handleSubmit}>
+              <Form.Group className="mb-3" controlId="title">
+                <Form.Label>Title</Form.Label>
+                <Form.Control type="text" placeholder="book title here" />
+              </Form.Group>
+
+              <Form.Group className="mb-3" controlId="description">
+                <Form.Label>Book Description</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="description of book here"
+                />
+              </Form.Group>
+
+              <Form.Group className="mb-3" controlId="status">
+                <Form.Label>Book Status (Read/Unread)</Form.Label>
+                <Form.Control type="text" placeholder="Read or not read?" />
+              </Form.Group>
+              <Button type="submit">Add Book!</Button>
+            </Form>
+          </Modal.Body>
         </Modal>
       </>
     );
