@@ -7,18 +7,6 @@ import Button from "react-bootstrap/Button";
 
 export default class BookForModal extends Component {
 
-  handleSubmit = (event) => {
-    event.preventDefault();
-    const newBook = {
-        title: event.target.title.value,
-        description: event.target.description.value,
-        status: event.target.status.value
-        
-    }
-    this.props.makeBook(newBook);
-    this.props.closeModal();
-    }
-
 
   render() {
     return (
@@ -28,7 +16,7 @@ export default class BookForModal extends Component {
             <Modal.Title>Enter your book!</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Form onSubmit={this.handleSubmit}>
+            <Form onSubmit={this.props.handleSubmit}>
               <Form.Group className="mb-3" controlId="title">
                 <Form.Label>Title</Form.Label>
                 <Form.Control type="text" placeholder="book title here" />
