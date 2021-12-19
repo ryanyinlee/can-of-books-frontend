@@ -12,7 +12,8 @@ class BestBooks extends React.Component {
     this.state = {
       books: [],
       showModal: false,
-      bookToUpdate: [],
+      showUpdateModal: false,
+      thisBook: [],
     };
   }
 
@@ -28,6 +29,24 @@ class BestBooks extends React.Component {
     this.setState({ showModal: false });
   };
 
+  handleUpdateClick = () => {
+    this.setState({ showUpdateModal: true });
+    
+    console.log("The handleUpdateClick gives us this.state.oneBook as: " + this.state.oneBook);
+  };
+
+  // setThisBook = (book) => {
+  //   this.setState({ thisBook: book });
+  // };
+
+  showUpdateModal = () => {
+    this.setState({ showUpdateModal: true });
+  };
+
+  closeUpdateModal = () => {
+    this.setState({ showUpdateModal: false });
+  };
+
   makeBook = async (newBook) => {
     console.log(`makeBook's newBook gives us: `, JSON.stringify(newBook));
 
@@ -36,7 +55,7 @@ class BestBooks extends React.Component {
         `${process.env.REACT_APP_SERVER_URL}/books`,
         newBook
       );
-      // console.log(newBook);
+      
       this.setState({ books: [...this.state.books, userBooks.data] });
     } catch (e) {
       console.log("error: " + e);
@@ -63,8 +82,8 @@ class BestBooks extends React.Component {
   updateBook = async (updatedBookObj, id) => {
     try {
       const updatedBook = await axios.put(
-        process.env.REACT_APP_SERVER_URL + "/books/" + id + updatedBookObj
-      );
+        `${process.env.REACT_APP_SERVER_URL}/books/${id}`,updatedBookObj);
+        console.log('updateBook gives us updatedBook.data: ', updatedBook.data);
       const updatedBookState = this.state.books.map((book) => {
         if (book._id === id) {
           return updatedBook.data;
@@ -90,7 +109,7 @@ class BestBooks extends React.Component {
 
       this.setState({ books: result.data });
       this.setState({ error: false });
-      //console.log(JSON.stringify(this.state.books[0]._id));
+      
     } catch (error) {
       console.error(error);
       this.setState({ error: true });
@@ -105,10 +124,9 @@ class BestBooks extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault();
     const newBook = {
-      title: event.target.title.value || this.props.book.title,
-      description:
-        event.target.description.value || this.props.book.description,
-      status: event.target.status.value || this.props.book.status,
+      title: event.target.title.value,
+      description: event.target.description.value,
+      status: event.target.status.value,
       email: this.props.user.email,
     };
     console.log(
@@ -117,6 +135,8 @@ class BestBooks extends React.Component {
     this.makeBook(newBook);
     this.closeModal();
   };
+
+
 
   render() {
     /* DONE: render user's books in a Carousel */
@@ -136,7 +156,7 @@ class BestBooks extends React.Component {
                     src="https://media.istockphoto.com/photos/row-of-books-on-a-shelf-multicolored-book-spines-stack-in-the-picture-id1222550815?b=1&k=20&m=1222550815&s=170667a&w=0&h=MTxBeBrrrYtdlpzhMpD1edwLYQf3OPgkNeDEgIzYJww="
                     alt="book placeholder"
                   />
-                  <li key={oneBook.id}>
+                  <li key={oneBook._id}>
                     <h3>{oneBook.title}</h3>
                     <br></br>
                     <p>{oneBook.description}</p>
@@ -153,20 +173,22 @@ class BestBooks extends React.Component {
                         Delete
                       </Button>
                     </span>
-                    {this.props.user && this.state.showModal ? (
-                      <UpdateBookModal
-                        handleSubmit={this.handleSubmit}
-                        oneBook={oneBook}
-                        showModal={this.state.showModal}
-                        closeModal={this.closeModal}
-                      />
-                    ) : (
-                      <Button onClick={this.handleClick}>
+
+
+                    
+                      <Button onClick={this.handleUpdateClick}>
                         Update This Book
                       </Button>
-                    )}
+                    
                   </li>
                 </Card>
+
+                <UpdateBookModal                       
+                        thisBook = {oneBook}
+                        showUpdateModal={this.state.showUpdateModal}
+                        closeUpdateModal={this.closeUpdateModal}
+                        updateBook ={this.updateBook}
+                />
 
                 {/* </Carousel.Caption> */}
               </Carousel.Item>
