@@ -12,7 +12,8 @@ class BestBooks extends React.Component {
     this.state = {
       books: [],
       showModal: false,
-      bookToUpdate: [],
+      showUpdateModal: false,
+      thisBook: [],
     };
   }
 
@@ -28,6 +29,24 @@ class BestBooks extends React.Component {
     this.setState({ showModal: false });
   };
 
+  handleUpdateClick = () => {
+    this.setState({ showUpdateModal: true });
+    
+    console.log("The handleUpdateClick gives us this.state.oneBook as: " + this.state.oneBook);
+  };
+
+  // setThisBook = (book) => {
+  //   this.setState({ thisBook: book });
+  // };
+
+  showUpdateModal = () => {
+    this.setState({ showUpdateModal: true });
+  };
+
+  closeUpdateModal = () => {
+    this.setState({ showUpdateModal: false });
+  };
+
   makeBook = async (newBook) => {
     console.log(`makeBook's newBook gives us: `, JSON.stringify(newBook));
 
@@ -36,7 +55,7 @@ class BestBooks extends React.Component {
         `${process.env.REACT_APP_SERVER_URL}/books`,
         newBook
       );
-      // console.log(newBook);
+      
       this.setState({ books: [...this.state.books, userBooks.data] });
     } catch (e) {
       console.log("error: " + e);
@@ -63,7 +82,7 @@ class BestBooks extends React.Component {
   updateBook = async (updatedBookObj, id) => {
     try {
       const updatedBook = await axios.put(
-        process.env.REACT_APP_SERVER_URL + "/books/" + id + updatedBookObj
+        `${process.env.REACT_APP_SERVER_URL}/books/${id}${updatedBookObj}`
       );
       const updatedBookState = this.state.books.map((book) => {
         if (book._id === id) {
@@ -90,7 +109,7 @@ class BestBooks extends React.Component {
 
       this.setState({ books: result.data });
       this.setState({ error: false });
-      //console.log(JSON.stringify(this.state.books[0]._id));
+      
     } catch (error) {
       console.error(error);
       this.setState({ error: true });
@@ -105,16 +124,30 @@ class BestBooks extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault();
     const newBook = {
-      title: event.target.title.value || this.props.book.title,
-      description:
-        event.target.description.value || this.props.book.description,
-      status: event.target.status.value || this.props.book.status,
+      title: event.target.title.value,
+      description: event.target.description.value,
+      status: event.target.status.value,
       email: this.props.user.email,
     };
     console.log(
       "handleSubmit gives us newbook object: " + JSON.stringify(newBook)
     );
     this.makeBook(newBook);
+    this.closeModal();
+  };
+
+  handleSubmitUpdate = (event) => {
+    event.preventDefault();
+    const newBook = {
+      title: event.target.title.value || this.props.book.title,
+      description: event.target.description.value || this.props.book.description,
+      status: event.target.status.value || this.props.book.status,
+      email: this.props.user.email,
+    };
+    console.log(
+      "handleSubmitUpdate gives us newbook object: " + JSON.stringify(newBook)
+    );
+    this.updateBook(newBook, newBook._id);
     this.closeModal();
   };
 
@@ -153,15 +186,16 @@ class BestBooks extends React.Component {
                         Delete
                       </Button>
                     </span>
-                    {this.props.user && this.state.showModal ? (
+
+                    {this.props.user && this.state.showUpdateModal ? (
                       <UpdateBookModal
-                        handleSubmit={this.handleSubmit}
-                        oneBook={oneBook}
-                        showModal={this.state.showModal}
-                        closeModal={this.closeModal}
+                        handleSubmitUpdate={this.handleSubmitUpdate}
+                        thisBook={oneBook}
+                        showUpdateModal={this.state.showUpdateModal}
+                        closeUpdateModal={this.closeUpdateModal}
                       />
                     ) : (
-                      <Button onClick={this.handleClick}>
+                      <Button onClick={this.handleUpdateClick}>
                         Update This Book
                       </Button>
                     )}

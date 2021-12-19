@@ -9,34 +9,35 @@ export default class BookForModal extends Component {
 
 
   render() {
-    console.log("this.props.book in updatebookmodal: " + this.props.oneBook);
-    console.log(JSON.stringify(this.props.oneBook));
+    console.log("this.props.book in updatebookmodal: " + this.props.thisBook);
+    console.log(JSON.stringify(this.props.thisBook));
+    
     
     return (
       <>
-        <Modal show={this.props.showModal} onHide={this.props.closeModal}>
+        <Modal show={this.props.showUpdateModal} onHide={this.props.closeUpdateModal}>
           <Modal.Header closeButton>
             <Modal.Title>Update your book!</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Container>
-              <Form onSubmit={this.props.handleSubmit}>
+              <Form onSubmit={this.props.handleSubmitUpdate}>
                 <Form.Group className="mb-3" controlId="title">
                   <Form.Label>Title</Form.Label>
-                  <Form.Control type="text" placeholder={this.props.oneBook.title} />
+                  <Form.Control type="text" placeholder={this.props.thisBook.title} />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="description">
                   <Form.Label>Book Description</Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder={this.props.oneBook.description}
+                    placeholder={this.props.thisBook.description}
                   />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="status">
                   <Form.Label>Book Status (Read/Unread)</Form.Label>
-                  <Form.Control type="text" placeholder={this.props.oneBook.status} />
+                  <Form.Control type="text" placeholder={this.props.thisBook.status} />
                 </Form.Group>
                 <Button type="submit">Submit Updated Book</Button>
               </Form>
