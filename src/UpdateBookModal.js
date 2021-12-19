@@ -6,22 +6,12 @@ import Button from  "react-bootstrap/Button"
 
 
 export default class BookForModal extends Component {
-handleSubmit = (event) => {
-    event.preventDefault();
-    
-    const updatedBook = {
-        title: event.target.title.value || this.props.book.title,
-        description: event.target.description.value || this.props.book.description,
-        status: event.target.status.value || this.props.book.status
-    }
-    this.props.updateBook(updatedBook, this.props.book._id);
-    this.props.closeModal();
 
-}
 
   render() {
-    console.log("this.props.book in updatebookmodal: " + this.props.book);
-    console.log("this.props.book._id in updatebookmodal: " + this.props.book._id);
+    console.log("this.props.book in updatebookmodal: " + this.props.oneBook);
+    console.log(JSON.stringify(this.props.oneBook));
+    
     return (
       <>
         <Modal show={this.props.showModal} onHide={this.props.closeModal}>
@@ -30,23 +20,23 @@ handleSubmit = (event) => {
           </Modal.Header>
           <Modal.Body>
             <Container>
-              <Form onSubmit={this.handleSubmit}>
+              <Form onSubmit={this.props.handleSubmit}>
                 <Form.Group className="mb-3" controlId="title">
                   <Form.Label>Title</Form.Label>
-                  <Form.Control type="text" placeholder={this.props.book.title} />
+                  <Form.Control type="text" placeholder={this.props.oneBook.title} />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="description">
                   <Form.Label>Book Description</Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder={this.props.book.description}
+                    placeholder={this.props.oneBook.description}
                   />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="status">
                   <Form.Label>Book Status (Read/Unread)</Form.Label>
-                  <Form.Control type="text" placeholder={this.props.book.status} />
+                  <Form.Control type="text" placeholder={this.props.oneBook.status} />
                 </Form.Group>
                 <Button type="submit">Submit Updated Book</Button>
               </Form>
