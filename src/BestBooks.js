@@ -82,8 +82,8 @@ class BestBooks extends React.Component {
   updateBook = async (updatedBookObj, id) => {
     try {
       const updatedBook = await axios.put(
-        `${process.env.REACT_APP_SERVER_URL}/books/${id}${updatedBookObj}`
-      );
+        `${process.env.REACT_APP_SERVER_URL}/books/${id}`,updatedBookObj);
+        console.log('updateBook gives us updatedBook.data: ', updatedBook.data);
       const updatedBookState = this.state.books.map((book) => {
         if (book._id === id) {
           return updatedBook.data;
@@ -136,20 +136,7 @@ class BestBooks extends React.Component {
     this.closeModal();
   };
 
-  handleSubmitUpdate = (event) => {
-    event.preventDefault();
-    const newBook = {
-      title: event.target.title.value || this.props.book.title,
-      description: event.target.description.value || this.props.book.description,
-      status: event.target.status.value || this.props.book.status,
-      email: this.props.user.email,
-    };
-    console.log(
-      "handleSubmitUpdate gives us newbook object: " + JSON.stringify(newBook)
-    );
-    this.updateBook(newBook, newBook._id);
-    this.closeModal();
-  };
+
 
   render() {
     /* DONE: render user's books in a Carousel */
@@ -169,7 +156,7 @@ class BestBooks extends React.Component {
                     src="https://media.istockphoto.com/photos/row-of-books-on-a-shelf-multicolored-book-spines-stack-in-the-picture-id1222550815?b=1&k=20&m=1222550815&s=170667a&w=0&h=MTxBeBrrrYtdlpzhMpD1edwLYQf3OPgkNeDEgIzYJww="
                     alt="book placeholder"
                   />
-                  <li key={oneBook.id}>
+                  <li key={oneBook._id}>
                     <h3>{oneBook.title}</h3>
                     <br></br>
                     <p>{oneBook.description}</p>
@@ -187,20 +174,21 @@ class BestBooks extends React.Component {
                       </Button>
                     </span>
 
-                    {this.props.user && this.state.showUpdateModal ? (
-                      <UpdateBookModal
-                        handleSubmitUpdate={this.handleSubmitUpdate}
-                        thisBook={oneBook}
-                        showUpdateModal={this.state.showUpdateModal}
-                        closeUpdateModal={this.closeUpdateModal}
-                      />
-                    ) : (
+
+                    
                       <Button onClick={this.handleUpdateClick}>
                         Update This Book
                       </Button>
-                    )}
+                    
                   </li>
                 </Card>
+
+                <UpdateBookModal                       
+                        thisBook = {oneBook}
+                        showUpdateModal={this.state.showUpdateModal}
+                        closeUpdateModal={this.closeUpdateModal}
+                        updateBook ={this.updateBook}
+                />
 
                 {/* </Carousel.Caption> */}
               </Carousel.Item>
