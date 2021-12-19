@@ -9,7 +9,6 @@ import LogoutButton from './LogoutButton';
 class Header extends React.Component {
 
 
-
   render() {
     return (
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
