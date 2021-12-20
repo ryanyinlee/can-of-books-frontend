@@ -4,6 +4,7 @@ import Login from './Login';
 import Footer from './Footer';
 import BestBooks from './BestBooks.js';
 import Profile from './Profile';
+import { withAuth0 } from "auth0/auth0-react";
 
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -66,7 +67,7 @@ componentDidMount() {
             </Profile> : <p></p>}
             
           </Switch>
-
+         
           <Footer />
         </Router>
       </>
@@ -74,4 +75,4 @@ componentDidMount() {
   }
 }
 
-export default App;
+export default withAuth0(App);

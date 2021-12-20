@@ -14,7 +14,6 @@ export default class BookCard extends Component {
   handleUpdateClick = () => {
     this.setState({ showUpdateModal: true });
 
-    console.log("The handleUpdateClick gives us this.state.oneBook as: " + this.state.oneBook);
   };
 
   showUpdateModal = () => {
