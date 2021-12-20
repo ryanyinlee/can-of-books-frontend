@@ -1,10 +1,9 @@
 import React from "react";
 import Carousel from "react-bootstrap/Carousel";
-import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
 import BookForModal from "./BookForModal";
-import UpdateBookModal from "./UpdateBookModal";
+import BookCard from "./BookCard";
 
 class BestBooks extends React.Component {
   constructor(props) {
@@ -29,23 +28,6 @@ class BestBooks extends React.Component {
     this.setState({ showModal: false });
   };
 
-  handleUpdateClick = () => {
-    this.setState({ showUpdateModal: true });
-    
-    console.log("The handleUpdateClick gives us this.state.oneBook as: " + this.state.oneBook);
-  };
-
-  // setThisBook = (book) => {
-  //   this.setState({ thisBook: book });
-  // };
-
-  showUpdateModal = () => {
-    this.setState({ showUpdateModal: true });
-  };
-
-  closeUpdateModal = () => {
-    this.setState({ showUpdateModal: false });
-  };
 
   makeBook = async (newBook) => {
     console.log(`makeBook's newBook gives us: `, JSON.stringify(newBook));
@@ -150,47 +132,15 @@ class BestBooks extends React.Component {
           <Carousel variant="dark">
             {this.state.books.map((oneBook) => (
               <Carousel.Item>
-                {/* <Carousel.Caption>  */}
-                <Card>
+                
                   <img
                     src="https://media.istockphoto.com/photos/row-of-books-on-a-shelf-multicolored-book-spines-stack-in-the-picture-id1222550815?b=1&k=20&m=1222550815&s=170667a&w=0&h=MTxBeBrrrYtdlpzhMpD1edwLYQf3OPgkNeDEgIzYJww="
                     alt="book placeholder"
                   />
-                  <li key={oneBook._id}>
-                    <h3>{oneBook.title}</h3>
-                    <br></br>
-                    <p>{oneBook.description}</p>
-                    <p>{oneBook.status}</p>
-                    <p>{oneBook.email}</p>
-
-                    <span>
-                      {" "}
-                      <Button
-                        onClick={() =>
-                          this.deleteBook(oneBook._id, oneBook.email)
-                        }
-                      >
-                        Delete
-                      </Button>
-                    </span>
-
-
-                    
-                      <Button onClick={this.handleUpdateClick}>
-                        Update This Book
-                      </Button>
-                    
-                  </li>
-                </Card>
-
-                <UpdateBookModal                       
-                        thisBook = {oneBook}
-                        showUpdateModal={this.state.showUpdateModal}
-                        closeUpdateModal={this.closeUpdateModal}
-                        updateBook ={this.updateBook}
-                />
-
-                {/* </Carousel.Caption> */}
+                  <Carousel.Caption>
+                    <BookCard deleteBook={this.deleteBook} oneBook={oneBook} updateBook={this.updateBook}/>
+                  </Carousel.Caption>
+                  
               </Carousel.Item>
             ))}
           </Carousel>
