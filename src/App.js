@@ -1,10 +1,11 @@
 import React from 'react';
 import Header from './Header';
-import Login from './Login';
 import Footer from './Footer';
 import BestBooks from './BestBooks.js';
 import Profile from './Profile';
 import { withAuth0 } from "auth0/auth0-react";
+import LoginButton from './LoginButton.js';
+import LogoutButton from './LogoutButton.js';
 
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -52,12 +53,15 @@ componentDidMount() {
 
     return (
       <>
+          <LoginButton />
+          {this.props.auth0.isAuthenticated &&
         <Router>
           <Header user={this.state.user} onLogout={this.logoutHandler} />
           <Switch>
             <Route exact path="/">
                   
-              {this.state.user ? <BestBooks user={this.state.user} /> : <Login loginHandler={this.loginHandler}/>}
+              <BestBooks user={this.state.user} />  
+            
             </Route>
                       
             {this.state.user ? 
@@ -65,11 +69,13 @@ componentDidMount() {
             name={this.state.user.name}
             email={this.state.user.email}>
             </Profile> : <p></p>}
-            
+            <LogoutButton />
           </Switch>
          
-          <Footer />
+            <Footer />
         </Router>
+          }
+        
       </>
     )
   }
